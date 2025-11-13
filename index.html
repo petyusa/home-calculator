@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Apartment Buying Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="hero">
+        <div class="hero-content">
+          <h1 class="main-title">Apartment Calculator</h1>
+          <p class="hero-subtitle">
+            Plan your apartment investment with precision
+          </p>
+        </div>
+        <div class="hero-accent"></div>
+      </header>
+
+      <section class="content-grid">
+        <form id="calcForm" class="inputs-section" onsubmit="return false;">
+          <div class="apartments-row">
+            <div class="input-section">
+              <h2 class="section-title">New Apartment</h2>
+              <div class="input-row">
+                <label>Apartment price</label>
+                <input
+                  type="text"
+                  id="apartmentPrice"
+                  class="money"
+                  value="202500000"
+                />
+              </div>
+              <div class="input-row">
+                <label>Parking lot</label>
+                <input
+                  type="text"
+                  id="parkingPrice"
+                  class="money"
+                  value="7500000"
+                />
+              </div>
+              <div class="input-row">
+                <label>Storage price</label>
+                <input type="text" id="storagePrice" class="money" value="0" />
+              </div>
+              <div class="input-row">
+                <label>Moving costs</label>
+                <input
+                  type="text"
+                  id="furniturePrice"
+                  class="money"
+                  value="3000000"
+                />
+              </div>
+            </div>
+
+            <div class="input-section">
+              <h2 class="section-title">Current Apartment</h2>
+              <div class="input-row">
+                <label>Current price</label>
+                <input
+                  type="text"
+                  id="currentPrice"
+                  value="105000000"
+                  class="money"
+                />
+              </div>
+              <div class="input-row">
+                <label>Current mortgage</label>
+                <input
+                  type="text"
+                  id="currentMortgage"
+                  class="money"
+                  value="7000000"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="input-section">
+            <h2 class="section-title">Financing</h2>
+            <div class="input-row">
+              <label>Interest rate (annual %)</label>
+              <input type="number" id="interestRate" value="6" />
+            </div>
+            <div class="input-row">
+              <label>House price change (annual %)</label>
+              <input type="number" id="expectedPriceChange" value="7" />
+            </div>
+            <div class="input-row">
+              <label>Years until sale</label>
+              <input
+                type="number"
+                id="yearsToSale"
+                step="0.25"
+                min="0"
+                value="1.5"
+              />
+            </div>
+            <div class="input-row">
+              <label>Current savings</label>
+              <input
+                type="text"
+                id="currentSavings"
+                class="money"
+                value="5000000"
+              />
+            </div>
+            <div class="input-row">
+              <label>Loan term (years)</label>
+              <input type="number" id="termYears" value="30" />
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button id="calculateBtn" type="button" class="btn btn-primary">
+              Calculate
+            </button>
+            <button id="resetBtn" type="button" class="btn btn-secondary">
+              Reset
+            </button>
+          </div>
+
+          <p class="input-note">
+            Calculates with 10% down payment. Includes capital gains tax (4%)
+            and attorney's fee (0.7%).
+          </p>
+        </form>
+
+        <section class="results-section" aria-live="polite">
+          <div class="results-header">
+            <h2>Your Results</h2>
+          </div>
+          <div class="results-cards">
+            <div class="result-card card-cyan">
+              <div class="result-label">Downpayment</div>
+              <div class="result-value" id="downpayment">—</div>
+              <div class="card-badge">10%</div>
+            </div>
+
+            <div class="result-card card-pink">
+              <div class="result-label">Leftover Amount</div>
+              <div class="result-value" id="leftover">—</div>
+              <div class="card-badge">Total</div>
+            </div>
+
+            <div class="result-card card-lime">
+              <div class="result-label">Expected Selling Price</div>
+              <div class="result-value" id="expectedSelling">—</div>
+              <div class="card-badge">1.5 yrs</div>
+            </div>
+
+            <div class="result-card card-orange">
+              <div class="result-label">Capital After Selling</div>
+              <div class="result-value" id="capitalAfterSelling">—</div>
+              <div class="card-badge">Ready</div>
+            </div>
+
+            <div class="result-card card-red">
+              <div class="result-label">Capital Gains Tax</div>
+              <div class="result-value" id="capitalGainTax">—</div>
+              <div class="card-badge">4%</div>
+            </div>
+
+            <div class="result-card card-purple">
+              <div class="result-label">Attorney's Fee</div>
+              <div class="result-value" id="attorneyFee">—</div>
+              <div class="card-badge">0.7%</div>
+            </div>
+
+            <div class="result-card card-cyan card-wide">
+              <div class="result-label">Apartment Last Fee</div>
+              <div class="result-value" id="lastFee">—</div>
+            </div>
+
+            <div class="result-card card-pink card-wide">
+              <div class="result-label">Mortgage Amount (Needed)</div>
+              <div class="result-value" id="mortgageAmount">—</div>
+            </div>
+
+            <div class="result-card card-lime card-wide">
+              <div class="result-label">Monthly Installment</div>
+              <div class="result-value" id="monthlyInstallment">—</div>
+            </div>
+          </div>
+
+          <div class="disclaimer">
+            <small
+              >All results are estimates. Verify with your lender and tax
+              advisor before making decisions.</small
+            >
+          </div>
+        </section>
+      </section>
+
+      <footer class="footer">
+        <small>💡 Edit values and click Calculate to see updated results</small>
+      </footer>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

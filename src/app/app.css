@@ -1,0 +1,37 @@
+/* App-specific styles for the mortgage report and prepayment inputs */
+.section-subtitle {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.radio-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.rate-options {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.rate-option {
+  border: 1px solid #d1e7ff;
+  background: white;
+  color: #0b406d;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.rate-option.selected {
+  background: #0b73ff;
+  color: white;
+  border-color: #075bcc;
+}
+
+/* result-card styles are provided globally; we keep only small helpers here */
