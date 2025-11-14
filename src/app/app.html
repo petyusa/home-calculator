@@ -183,7 +183,7 @@
       <!-- Other Results in Accordion -->
       <details class="accordion results-accordion">
         <summary class="section-title">
-          View All Details
+          <span>All Details</span>
         </summary>
         <div class="results-cards">
           <div class="result-card card-cyan">
@@ -255,85 +255,91 @@
           before making decisions.</small>
       </div>
 
-      <div class="results-cards">
-        <div class="result-card card-lime">
-          <div class="result-label">Baseline monthly</div>
-          <div class="result-value">
-            {{ formatCurrency(mortgageReport().baselineMonthly) }}
+      <!-- Prepayment Results in Accordion -->
+      <details class="accordion results-accordion">
+        <summary class="section-title">
+          <span>Prepayment Analysis</span>
+        </summary>
+        <div class="results-cards">
+          <div class="result-card card-lime">
+            <div class="result-label">Baseline monthly</div>
+            <div class="result-value">
+              {{ formatCurrency(mortgageReport().baselineMonthly) }}
+            </div>
+          </div>
+
+          <div class="result-card card-cyan">
+            <div class="result-label">Monthly after prepayment</div>
+            <div class="result-value">
+              {{ formatCurrency(mortgageReport().monthlyAfter) }}
+            </div>
+          </div>
+
+          <!-- Preview for the currently-entered (not-yet-added) prepayment -->
+          <div *ngIf="newPrepaymentAmount() > 0" class="result-card card-teal">
+            <div class="result-label">Preview: Monthly after pending</div>
+            <div class="result-value">
+              {{ formatCurrency(pendingMortgageReport().monthlyAfter) }}
+            </div>
+          </div>
+
+          <div *ngIf="newPrepaymentAmount() > 0" class="result-card card-pink">
+            <div class="result-label">Preview: Change in monthly</div>
+            <div class="result-value">
+              {{ formatCurrency(pendingMortgageReport().monthlyAfter -
+              mortgageReport().baselineMonthly) }}
+            </div>
+          </div>
+
+          <div class="result-card card-pink">
+            <div class="result-label">Change in monthly</div>
+            <div class="result-value">
+              {{ formatCurrency(mortgageReport().monthlyAfter -
+              mortgageReport().baselineMonthly) }}
+            </div>
+          </div>
+
+          <div class="result-card card-purple">
+            <div class="result-label">Months until finished</div>
+            <div class="result-value">{{ mortgageReport().monthsUsed }}</div>
+          </div>
+
+          <div class="result-card card-pink card-wide">
+            <div class="result-label">Total paid (incl prepayment & fees)</div>
+            <div class="result-value">
+              {{ formatCurrency(mortgageReport().totalPaid) }}
+            </div>
+          </div>
+
+          <div class="result-card card-red">
+            <div class="result-label">Total interest paid</div>
+            <div class="result-value">
+              {{ formatCurrency(mortgageReport().totalInterest) }}
+            </div>
+          </div>
+
+          <div class="result-card card-orange">
+            <div class="result-label">Prepayment fees</div>
+            <div class="result-value">
+              {{ formatCurrency(mortgageReport().totalFees) }}
+            </div>
+          </div>
+
+          <div class="result-card card-lime">
+            <div class="result-label">Interest saved vs baseline</div>
+            <div class="result-value">
+              {{ formatCurrency(mortgageReport().interestSaved) }}
+            </div>
+          </div>
+
+          <div class="result-card card-cyan">
+            <div class="result-label">Total saved</div>
+            <div class="result-value">
+              {{ formatCurrency(mortgageReport().totalSaved) }}
+            </div>
           </div>
         </div>
-
-        <div class="result-card card-cyan">
-          <div class="result-label">Monthly after prepayment</div>
-          <div class="result-value">
-            {{ formatCurrency(mortgageReport().monthlyAfter) }}
-          </div>
-        </div>
-
-        <!-- Preview for the currently-entered (not-yet-added) prepayment -->
-        <div *ngIf="newPrepaymentAmount() > 0" class="result-card card-teal">
-          <div class="result-label">Preview: Monthly after pending</div>
-          <div class="result-value">
-            {{ formatCurrency(pendingMortgageReport().monthlyAfter) }}
-          </div>
-        </div>
-
-        <div *ngIf="newPrepaymentAmount() > 0" class="result-card card-pink">
-          <div class="result-label">Preview: Change in monthly</div>
-          <div class="result-value">
-            {{ formatCurrency(pendingMortgageReport().monthlyAfter -
-            mortgageReport().baselineMonthly) }}
-          </div>
-        </div>
-
-        <div class="result-card card-pink">
-          <div class="result-label">Change in monthly</div>
-          <div class="result-value">
-            {{ formatCurrency(mortgageReport().monthlyAfter -
-            mortgageReport().baselineMonthly) }}
-          </div>
-        </div>
-
-        <div class="result-card card-purple">
-          <div class="result-label">Months until finished</div>
-          <div class="result-value">{{ mortgageReport().monthsUsed }}</div>
-        </div>
-
-        <div class="result-card card-pink card-wide">
-          <div class="result-label">Total paid (incl prepayment & fees)</div>
-          <div class="result-value">
-            {{ formatCurrency(mortgageReport().totalPaid) }}
-          </div>
-        </div>
-
-        <div class="result-card card-red">
-          <div class="result-label">Total interest paid</div>
-          <div class="result-value">
-            {{ formatCurrency(mortgageReport().totalInterest) }}
-          </div>
-        </div>
-
-        <div class="result-card card-orange">
-          <div class="result-label">Prepayment fees</div>
-          <div class="result-value">
-            {{ formatCurrency(mortgageReport().totalFees) }}
-          </div>
-        </div>
-
-        <div class="result-card card-lime">
-          <div class="result-label">Interest saved vs baseline</div>
-          <div class="result-value">
-            {{ formatCurrency(mortgageReport().interestSaved) }}
-          </div>
-        </div>
-
-        <div class="result-card card-cyan">
-          <div class="result-label">Total saved</div>
-          <div class="result-value">
-            {{ formatCurrency(mortgageReport().totalSaved) }}
-          </div>
-        </div>
-      </div>
+      </details>
     </section>
   </section>
 
