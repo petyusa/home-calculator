@@ -169,69 +169,9 @@
       <div class="results-header">
         <h2>Your Results</h2>
       </div>
+
+      <!-- Monthly Installment - Displayed First and Prominently -->
       <div class="results-cards">
-        <div class="result-card card-cyan">
-          <div class="result-label">Downpayment</div>
-          <div class="result-value">
-            {{ formatCurrency(results().downpayment) }}
-          </div>
-          <div class="card-badge">{{ downpaymentPercent() }}%</div>
-        </div>
-
-        <div class="result-card card-pink">
-          <div class="result-label">Leftover Amount</div>
-          <div class="result-value">
-            {{ formatCurrency(results().leftover) }}
-          </div>
-          <div class="card-badge">Total</div>
-        </div>
-
-        <div class="result-card card-lime">
-          <div class="result-label">Expected Selling Price</div>
-          <div class="result-value">
-            {{ formatCurrency(results().expectedSelling) }}
-          </div>
-          <div class="card-badge">{{ yearsToSale() }} yrs</div>
-        </div>
-
-        <div class="result-card card-orange">
-          <div class="result-label">Capital After Selling</div>
-          <div class="result-value">
-            {{ formatCurrency(results().capitalAfterSelling) }}
-          </div>
-          <div class="card-badge">Ready</div>
-        </div>
-
-        <div class="result-card card-red">
-          <div class="result-label">Capital Gains Tax</div>
-          <div class="result-value">
-            {{ formatCurrency(results().capitalGainTax) }}
-          </div>
-          <div class="card-badge">4%</div>
-        </div>
-
-        <div class="result-card card-purple">
-          <div class="result-label">Attorney's Fee</div>
-          <div class="result-value">
-            {{ formatCurrency(results().attorneyFee) }}
-          </div>
-          <div class="card-badge">{{ attorneyFeePercent() }}%</div>
-        </div>
-
-        <div class="result-card card-cyan card-wide">
-          <div class="result-label">Apartment Last Fee</div>
-          <div class="result-value">
-            {{ formatCurrency(results().lastFee) }}
-          </div>
-        </div>
-
-        <div class="result-card card-pink card-wide">
-          <div class="result-label">Mortgage Amount (Needed)</div>
-          <div class="result-value">
-            {{ formatCurrency(results().mortgageAmount) }}
-          </div>
-        </div>
-
         <div class="result-card card-lime card-wide">
           <div class="result-label">Monthly Installment</div>
           <div class="result-value">
@@ -239,6 +179,76 @@
           </div>
         </div>
       </div>
+
+      <!-- Other Results in Accordion -->
+      <details class="accordion results-accordion">
+        <summary class="section-title">
+          View All Details
+        </summary>
+        <div class="results-cards">
+          <div class="result-card card-cyan">
+            <div class="result-label">Downpayment</div>
+            <div class="result-value">
+              {{ formatCurrency(results().downpayment) }}
+            </div>
+            <div class="card-badge">{{ downpaymentPercent() }}%</div>
+          </div>
+
+          <div class="result-card card-pink">
+            <div class="result-label">Leftover Amount</div>
+            <div class="result-value">
+              {{ formatCurrency(results().leftover) }}
+            </div>
+            <div class="card-badge">Total</div>
+          </div>
+
+          <div class="result-card card-lime">
+            <div class="result-label">Expected Selling Price</div>
+            <div class="result-value">
+              {{ formatCurrency(results().expectedSelling) }}
+            </div>
+            <div class="card-badge">{{ yearsToSale() }} yrs</div>
+          </div>
+
+          <div class="result-card card-orange">
+            <div class="result-label">Capital After Selling</div>
+            <div class="result-value">
+              {{ formatCurrency(results().capitalAfterSelling) }}
+            </div>
+            <div class="card-badge">Ready</div>
+          </div>
+
+          <div class="result-card card-red">
+            <div class="result-label">Capital Gains Tax</div>
+            <div class="result-value">
+              {{ formatCurrency(results().capitalGainTax) }}
+            </div>
+            <div class="card-badge">4%</div>
+          </div>
+
+          <div class="result-card card-purple">
+            <div class="result-label">Attorney's Fee</div>
+            <div class="result-value">
+              {{ formatCurrency(results().attorneyFee) }}
+            </div>
+            <div class="card-badge">{{ attorneyFeePercent() }}%</div>
+          </div>
+
+          <div class="result-card card-cyan card-wide">
+            <div class="result-label">Apartment Last Fee</div>
+            <div class="result-value">
+              {{ formatCurrency(results().lastFee) }}
+            </div>
+          </div>
+
+          <div class="result-card card-pink card-wide">
+            <div class="result-label">Mortgage Amount (Needed)</div>
+            <div class="result-value">
+              {{ formatCurrency(results().mortgageAmount) }}
+            </div>
+          </div>
+        </div>
+      </details>
 
       <div class="disclaimer">
         <small>All results are estimates. Verify with your lender and tax advisor
