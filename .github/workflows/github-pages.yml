@@ -46,6 +46,13 @@ jobs:
           # IMPORTANT: For example, if your repo URL is github.com/user/my-app, use /my-app/
           npm run build -- --base-href /home-calculator/
 
+      # New step to create a 404.html for Angular routing
+      - name: Copy index.html to 404.html
+        run: |
+          # This is a trick to make client-side routing work on GitHub Pages
+          # It serves the app's index.html file for any 404 (e.g., on page refresh)
+          cp ./dist/home-calculator/browser/index.html ./dist/home-calculator/browser/404.html
+          
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
@@ -54,7 +61,8 @@ jobs:
         with:
           # IMPORTANT: Change 'my-app' to your Angular project's name
           # (You can find this name in your angular.json file)
-          path: './dist/home-calculator' 
+          # We point to the 'browser' sub-directory, which is the default for new Angular apps
+          path: './dist/home-calculator/browser' 
           # This path should match the 'outputPath' in your angular.json
 
   # Deploy job
