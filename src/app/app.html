@@ -169,69 +169,9 @@
       <div class="results-header">
         <h2>Your Results</h2>
       </div>
+
+      <!-- Monthly Installment - Displayed First and Prominently -->
       <div class="results-cards">
-        <div class="result-card card-cyan">
-          <div class="result-label">Downpayment</div>
-          <div class="result-value">
-            {{ formatCurrency(results().downpayment) }}
-          </div>
-          <div class="card-badge">{{ downpaymentPercent() }}%</div>
-        </div>
-
-        <div class="result-card card-pink">
-          <div class="result-label">Leftover Amount</div>
-          <div class="result-value">
-            {{ formatCurrency(results().leftover) }}
-          </div>
-          <div class="card-badge">Total</div>
-        </div>
-
-        <div class="result-card card-lime">
-          <div class="result-label">Expected Selling Price</div>
-          <div class="result-value">
-            {{ formatCurrency(results().expectedSelling) }}
-          </div>
-          <div class="card-badge">{{ yearsToSale() }} yrs</div>
-        </div>
-
-        <div class="result-card card-orange">
-          <div class="result-label">Capital After Selling</div>
-          <div class="result-value">
-            {{ formatCurrency(results().capitalAfterSelling) }}
-          </div>
-          <div class="card-badge">Ready</div>
-        </div>
-
-        <div class="result-card card-red">
-          <div class="result-label">Capital Gains Tax</div>
-          <div class="result-value">
-            {{ formatCurrency(results().capitalGainTax) }}
-          </div>
-          <div class="card-badge">4%</div>
-        </div>
-
-        <div class="result-card card-purple">
-          <div class="result-label">Attorney's Fee</div>
-          <div class="result-value">
-            {{ formatCurrency(results().attorneyFee) }}
-          </div>
-          <div class="card-badge">{{ attorneyFeePercent() }}%</div>
-        </div>
-
-        <div class="result-card card-cyan card-wide">
-          <div class="result-label">Apartment Last Fee</div>
-          <div class="result-value">
-            {{ formatCurrency(results().lastFee) }}
-          </div>
-        </div>
-
-        <div class="result-card card-pink card-wide">
-          <div class="result-label">Mortgage Amount (Needed)</div>
-          <div class="result-value">
-            {{ formatCurrency(results().mortgageAmount) }}
-          </div>
-        </div>
-
         <div class="result-card card-lime card-wide">
           <div class="result-label">Monthly Installment</div>
           <div class="result-value">
@@ -240,90 +180,166 @@
         </div>
       </div>
 
+      <!-- Other Results in Accordion -->
+      <details class="accordion results-accordion">
+        <summary class="section-title">
+          <span>All Details</span>
+        </summary>
+        <div class="results-cards">
+          <div class="result-card card-cyan">
+            <div class="result-label">Downpayment</div>
+            <div class="result-value">
+              {{ formatCurrency(results().downpayment) }}
+            </div>
+            <div class="card-badge">{{ downpaymentPercent() }}%</div>
+          </div>
+
+          <div class="result-card card-pink">
+            <div class="result-label">Leftover Amount</div>
+            <div class="result-value">
+              {{ formatCurrency(results().leftover) }}
+            </div>
+            <div class="card-badge">Total</div>
+          </div>
+
+          <div class="result-card card-lime">
+            <div class="result-label">Expected Selling Price</div>
+            <div class="result-value">
+              {{ formatCurrency(results().expectedSelling) }}
+            </div>
+            <div class="card-badge">{{ yearsToSale() }} yrs</div>
+          </div>
+
+          <div class="result-card card-orange">
+            <div class="result-label">Capital After Selling</div>
+            <div class="result-value">
+              {{ formatCurrency(results().capitalAfterSelling) }}
+            </div>
+            <div class="card-badge">Ready</div>
+          </div>
+
+          <div class="result-card card-red">
+            <div class="result-label">Capital Gains Tax</div>
+            <div class="result-value">
+              {{ formatCurrency(results().capitalGainTax) }}
+            </div>
+            <div class="card-badge">4%</div>
+          </div>
+
+          <div class="result-card card-purple">
+            <div class="result-label">Attorney's Fee</div>
+            <div class="result-value">
+              {{ formatCurrency(results().attorneyFee) }}
+            </div>
+            <div class="card-badge">{{ attorneyFeePercent() }}%</div>
+          </div>
+
+          <div class="result-card card-cyan card-wide">
+            <div class="result-label">Apartment Last Fee</div>
+            <div class="result-value">
+              {{ formatCurrency(results().lastFee) }}
+            </div>
+          </div>
+
+          <div class="result-card card-pink card-wide">
+            <div class="result-label">Mortgage Amount (Needed)</div>
+            <div class="result-value">
+              {{ formatCurrency(results().mortgageAmount) }}
+            </div>
+          </div>
+        </div>
+      </details>
+
       <div class="disclaimer">
         <small>All results are estimates. Verify with your lender and tax advisor
           before making decisions.</small>
       </div>
 
-      <div class="results-cards">
-        <div class="result-card card-lime">
-          <div class="result-label">Baseline monthly</div>
-          <div class="result-value">
-            {{ formatCurrency(mortgageReport().baselineMonthly) }}
+      <!-- Prepayment Results in Accordion -->
+      <details class="accordion results-accordion">
+        <summary class="section-title">
+          <span>Prepayment Analysis</span>
+        </summary>
+        <div class="results-cards">
+          <div class="result-card card-lime">
+            <div class="result-label">Baseline monthly</div>
+            <div class="result-value">
+              {{ formatCurrency(mortgageReport().baselineMonthly) }}
+            </div>
+          </div>
+
+          <div class="result-card card-cyan">
+            <div class="result-label">Monthly after prepayment</div>
+            <div class="result-value">
+              {{ formatCurrency(mortgageReport().monthlyAfter) }}
+            </div>
+          </div>
+
+          <!-- Preview for the currently-entered (not-yet-added) prepayment -->
+          <div *ngIf="newPrepaymentAmount() > 0" class="result-card card-teal">
+            <div class="result-label">Preview: Monthly after pending</div>
+            <div class="result-value">
+              {{ formatCurrency(pendingMortgageReport().monthlyAfter) }}
+            </div>
+          </div>
+
+          <div *ngIf="newPrepaymentAmount() > 0" class="result-card card-pink">
+            <div class="result-label">Preview: Change in monthly</div>
+            <div class="result-value">
+              {{ formatCurrency(pendingMortgageReport().monthlyAfter -
+              mortgageReport().baselineMonthly) }}
+            </div>
+          </div>
+
+          <div class="result-card card-pink">
+            <div class="result-label">Change in monthly</div>
+            <div class="result-value">
+              {{ formatCurrency(mortgageReport().monthlyAfter -
+              mortgageReport().baselineMonthly) }}
+            </div>
+          </div>
+
+          <div class="result-card card-purple">
+            <div class="result-label">Months until finished</div>
+            <div class="result-value">{{ mortgageReport().monthsUsed }}</div>
+          </div>
+
+          <div class="result-card card-pink card-wide">
+            <div class="result-label">Total paid (incl prepayment & fees)</div>
+            <div class="result-value">
+              {{ formatCurrency(mortgageReport().totalPaid) }}
+            </div>
+          </div>
+
+          <div class="result-card card-red">
+            <div class="result-label">Total interest paid</div>
+            <div class="result-value">
+              {{ formatCurrency(mortgageReport().totalInterest) }}
+            </div>
+          </div>
+
+          <div class="result-card card-orange">
+            <div class="result-label">Prepayment fees</div>
+            <div class="result-value">
+              {{ formatCurrency(mortgageReport().totalFees) }}
+            </div>
+          </div>
+
+          <div class="result-card card-lime">
+            <div class="result-label">Interest saved vs baseline</div>
+            <div class="result-value">
+              {{ formatCurrency(mortgageReport().interestSaved) }}
+            </div>
+          </div>
+
+          <div class="result-card card-cyan">
+            <div class="result-label">Total saved</div>
+            <div class="result-value">
+              {{ formatCurrency(mortgageReport().totalSaved) }}
+            </div>
           </div>
         </div>
-
-        <div class="result-card card-cyan">
-          <div class="result-label">Monthly after prepayment</div>
-          <div class="result-value">
-            {{ formatCurrency(mortgageReport().monthlyAfter) }}
-          </div>
-        </div>
-
-        <!-- Preview for the currently-entered (not-yet-added) prepayment -->
-        <div *ngIf="newPrepaymentAmount() > 0" class="result-card card-teal">
-          <div class="result-label">Preview: Monthly after pending</div>
-          <div class="result-value">
-            {{ formatCurrency(pendingMortgageReport().monthlyAfter) }}
-          </div>
-        </div>
-
-        <div *ngIf="newPrepaymentAmount() > 0" class="result-card card-pink">
-          <div class="result-label">Preview: Change in monthly</div>
-          <div class="result-value">
-            {{ formatCurrency(pendingMortgageReport().monthlyAfter -
-            mortgageReport().baselineMonthly) }}
-          </div>
-        </div>
-
-        <div class="result-card card-pink">
-          <div class="result-label">Change in monthly</div>
-          <div class="result-value">
-            {{ formatCurrency(mortgageReport().monthlyAfter -
-            mortgageReport().baselineMonthly) }}
-          </div>
-        </div>
-
-        <div class="result-card card-purple">
-          <div class="result-label">Months until finished</div>
-          <div class="result-value">{{ mortgageReport().monthsUsed }}</div>
-        </div>
-
-        <div class="result-card card-pink card-wide">
-          <div class="result-label">Total paid (incl prepayment & fees)</div>
-          <div class="result-value">
-            {{ formatCurrency(mortgageReport().totalPaid) }}
-          </div>
-        </div>
-
-        <div class="result-card card-red">
-          <div class="result-label">Total interest paid</div>
-          <div class="result-value">
-            {{ formatCurrency(mortgageReport().totalInterest) }}
-          </div>
-        </div>
-
-        <div class="result-card card-orange">
-          <div class="result-label">Prepayment fees</div>
-          <div class="result-value">
-            {{ formatCurrency(mortgageReport().totalFees) }}
-          </div>
-        </div>
-
-        <div class="result-card card-lime">
-          <div class="result-label">Interest saved vs baseline</div>
-          <div class="result-value">
-            {{ formatCurrency(mortgageReport().interestSaved) }}
-          </div>
-        </div>
-
-        <div class="result-card card-cyan">
-          <div class="result-label">Total saved</div>
-          <div class="result-value">
-            {{ formatCurrency(mortgageReport().totalSaved) }}
-          </div>
-        </div>
-      </div>
+      </details>
     </section>
   </section>
 

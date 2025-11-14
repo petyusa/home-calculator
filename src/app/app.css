@@ -69,3 +69,32 @@
 .prepayment-list {
   padding: 8px 16px 16px 16px;
 }
+
+/* Results accordion styling */
+.results-accordion {
+  margin-top: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(20, 24, 41, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.results-accordion summary {
+  cursor: pointer;
+  padding: 14px 16px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.results-accordion summary:hover {
+  background: rgba(0, 217, 255, 0.08);
+}
+
+.results-accordion .results-cards {
+  padding: 12px;
+}
