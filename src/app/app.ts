@@ -122,6 +122,9 @@ export class App {
   // Multiple prepayments support
   protected readonly prepayments = signal<Prepayment[]>([]);
 
+  // Control visibility for the prepayments accordion/form — hidden by default
+  protected readonly prepaymentFormOpen = signal(false);
+
   // Temporary inputs for adding a prepayment
   protected readonly newPrepaymentAmount = signal(0);
   protected readonly newPrepaymentFeePercent = signal(0);
@@ -150,6 +153,10 @@ export class App {
     this.newPrepaymentFeePercent.set(0);
     this.newPrepaymentMonth.set(1);
     this.newPrepaymentEffect.set('reducePayment');
+
+    // Keep the prepayment form open when a prepayment is added so user sees
+    // the newly-added entry. (Small UX improvement.)
+    this.prepaymentFormOpen.set(true);
   }
 
   protected removePrepayment(index: number): void {

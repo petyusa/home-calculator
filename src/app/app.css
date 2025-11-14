@@ -35,3 +35,37 @@
 }
 
 /* result-card styles are provided globally; we keep only small helpers here */
+
+/* Accordion wrap for prepayments */
+.accordion {
+  margin-top: 12px;
+  border: 1px solid #e6eefc;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+}
+
+/* Place the accordion in the left column of the .content-grid so inputs
+   and prepayments stay together on the left while results remain on the right. */
+.accordion {
+  grid-column: 1;
+  width: 100%;
+}
+
+.accordion summary {
+  cursor: pointer;
+  padding: 12px 16px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+}
+
+.prepayment-form {
+  padding: 12px 16px 16px 16px;
+}
+
+.prepayment-list {
+  padding: 8px 16px 16px 16px;
+}

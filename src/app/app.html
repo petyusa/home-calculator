@@ -1,223 +1,169 @@
 <main class="container">
-  <header class="hero">
+  <!-- <header class="hero">
     <div class="hero-content">
       <h1 class="main-title">Apartment Calculator</h1>
       <p class="hero-subtitle">Plan your apartment investment with precision</p>
     </div>
     <div class="hero-accent"></div>
-  </header>
+  </header> -->
 
   <section class="content-grid">
-    <form
-      [formGroup]="form"
-      class="inputs-section"
-      (ngSubmit)="$event.preventDefault()"
-    >
-      <div class="apartments-row">
-        <div class="input-section">
-          <h2 class="section-title">New Apartment</h2>
-          <div class="input-row">
-            <label>Apartment price</label>
-            <input
-              type="number"
-              formControlName="apartmentPrice"
-              class="money"
-            />
+    <div>
+      <form [formGroup]="form" class="inputs-section" (ngSubmit)="$event.preventDefault()">
+        <div class="apartments-row">
+          <div class="input-section">
+            <h2 class="section-title">New Apartment</h2>
+            <div class="input-row">
+              <label>Apartment price</label>
+              <input type="number" formControlName="apartmentPrice" class="money" />
+            </div>
+            <div class="input-row">
+              <label>Parking lot</label>
+              <input type="number" formControlName="parkingPrice" class="money" />
+            </div>
+            <div class="input-row">
+              <label>Storage price</label>
+              <input type="number" formControlName="storagePrice" class="money" />
+            </div>
+            <div class="input-row">
+              <label>Moving costs</label>
+              <input type="number" formControlName="movingCosts" class="money" />
+            </div>
           </div>
-          <div class="input-row">
-            <label>Parking lot</label>
-            <input type="number" formControlName="parkingPrice" class="money" />
-          </div>
-          <div class="input-row">
-            <label>Storage price</label>
-            <input type="number" formControlName="storagePrice" class="money" />
-          </div>
-          <div class="input-row">
-            <label>Moving costs</label>
-            <input type="number" formControlName="movingCosts" class="money" />
+
+          <div class="input-section">
+            <h2 class="section-title">Current Apartment</h2>
+            <div class="input-row">
+              <label>Current price</label>
+              <input type="number" formControlName="currentPrice" class="money" />
+            </div>
+            <div class="input-row">
+              <label>Current mortgage</label>
+              <input type="number" formControlName="currentMortgage" class="money" />
+            </div>
           </div>
         </div>
 
         <div class="input-section">
-          <h2 class="section-title">Current Apartment</h2>
+          <h2 class="section-title">Financing</h2>
           <div class="input-row">
-            <label>Current price</label>
-            <input type="number" formControlName="currentPrice" class="money" />
+            <label>Interest rate (annual %)</label>
+            <div class="rate-options">
+              <button type="button" class="rate-option" *ngFor="let r of interestOptions" (click)="selectInterest(r)"
+                [class.selected]="interestRate() === r">
+                {{ (r + '')?.replace('.', ',') }}%
+              </button>
+            </div>
           </div>
           <div class="input-row">
-            <label>Current mortgage</label>
-            <input
-              type="number"
-              formControlName="currentMortgage"
-              class="money"
-            />
+            <label>Downpayment ( % )</label>
+            <input type="number" formControlName="downpaymentPercent" />
           </div>
-        </div>
-      </div>
-
-      <div class="input-section">
-        <h2 class="section-title">Financing</h2>
-        <div class="input-row">
-          <label>Interest rate (annual %)</label>
-          <div class="rate-options">
-            <button
-              type="button"
-              class="rate-option"
-              *ngFor="let r of interestOptions"
-              (click)="selectInterest(r)"
-              [class.selected]="interestRate() === r"
-            >
-              {{ (r + '')?.replace('.', ',') }}%
-            </button>
+          <div class="input-row">
+            <label>House price change (annual %)</label>
+            <div class="rate-options">
+              <button type="button" class="rate-option" *ngFor="let r of expectedChangeOptions"
+                (click)="selectExpectedPriceChange(r)" [class.selected]="expectedPriceChange() === r">
+                {{ (r + '')?.replace('.', ',') }}%
+              </button>
+            </div>
           </div>
-        </div>
-        <div class="input-row">
-          <label>Downpayment ( % )</label>
-          <input type="number" formControlName="downpaymentPercent" />
-        </div>
-        <div class="input-row">
-          <label>House price change (annual %)</label>
-          <div class="rate-options">
-            <button
-              type="button"
-              class="rate-option"
-              *ngFor="let r of expectedChangeOptions"
-              (click)="selectExpectedPriceChange(r)"
-              [class.selected]="expectedPriceChange() === r"
-            >
-              {{ (r + '')?.replace('.', ',') }}%
-            </button>
+          <div class="input-row">
+            <label>Attorney's fee (% of price)</label>
+            <div class="rate-options">
+              <button type="button" class="rate-option" *ngFor="let a of attorneyFeeOptions"
+                (click)="selectAttorneyFee(a)" [class.selected]="attorneyFeePercent() === a">
+                {{ (a + '')?.replace('.', ',') }}%
+              </button>
+            </div>
           </div>
-        </div>
-        <div class="input-row">
-          <label>Attorney's fee (% of price)</label>
-          <div class="rate-options">
-            <button
-              type="button"
-              class="rate-option"
-              *ngFor="let a of attorneyFeeOptions"
-              (click)="selectAttorneyFee(a)"
-              [class.selected]="attorneyFeePercent() === a"
-            >
-              {{ (a + '')?.replace('.', ',') }}%
-            </button>
+          <div class="input-row">
+            <label>Years until sale</label>
+            <input type="number" step="0.25" min="0" formControlName="yearsToSale" />
           </div>
-        </div>
-        <div class="input-row">
-          <label>Years until sale</label>
-          <input
-            type="number"
-            step="0.25"
-            min="0"
-            formControlName="yearsToSale"
-          />
-        </div>
-        <div class="input-row">
-          <label>Current savings</label>
-          <input type="number" formControlName="currentSavings" class="money" />
-        </div>
-        <div class="input-row">
-          <label>Loan term (years)</label>
-          <input type="number" formControlName="termYears" />
+          <div class="input-row">
+            <label>Current savings</label>
+            <input type="number" formControlName="currentSavings" class="money" />
+          </div>
+          <div class="input-row">
+            <label>Loan term (years)</label>
+            <input type="number" formControlName="termYears" />
+          </div>
+          <!-- Prepayments are now in a separate form (hidden by default) -->
         </div>
 
-        <!-- Single optional prepayment removed. Use the Multiple Prepayments section below to add one or more prepayments. -->
-
-        <h3 class="section-subtitle">Multiple Prepayments</h3>
-        <div class="input-row">
-          <label>Amount</label>
-          <input
-            type="number"
-            [value]="newPrepaymentAmount()"
-            (input)="onNewPrepaymentAmount($any($event.target).value)"
-            class="money"
-          />
-        </div>
-        <div class="input-row">
-          <label>Fee %</label>
-          <input
-            type="number"
-            [value]="newPrepaymentFeePercent()"
-            (input)="onNewPrepaymentFeePercent($any($event.target).value)"
-          />
-        </div>
-        <div class="input-row">
-          <label>Month</label>
-          <input
-            type="number"
-            min="1"
-            [value]="newPrepaymentMonth()"
-            (input)="onNewPrepaymentMonth($any($event.target).value)"
-          />
-        </div>
-        <div class="input-row">
-          <label>Effect</label>
-          <div class="radio-row">
-            <label
-              ><input
-                type="radio"
-                name="newPrepayEffect"
-                [checked]="newPrepaymentEffect() === 'reducePayment'"
-                (change)="newPrepaymentEffect.set('reducePayment')"
-              />
-              Reduce monthly</label
-            >
-            <label
-              ><input
-                type="radio"
-                name="newPrepayEffect"
-                [checked]="newPrepaymentEffect() === 'reduceTerm'"
-                (change)="newPrepaymentEffect.set('reduceTerm')"
-              />
-              Reduce term</label
-            >
-          </div>
-        </div>
         <div class="button-group">
-          <button type="button" class="btn" (click)="addPrepayment()">
-            Add prepayment
+          <button type="button" class="btn btn-secondary" (click)="resetForm()">
+            Reset
           </button>
         </div>
 
-        <div class="prepayment-list">
-          <div
-            *ngFor="let p of prepayments(); let i = index"
-            class="prepayment-row"
-          >
+        <p class="input-note">
+          Calculates with {{ downpaymentPercent() }}% down payment. Includes
+          capital gains tax (4%) and attorney's fee ({{ attorneyFeePercent() }}%).
+          Results update automatically.
+        </p>
+      </form>
+
+      <!-- Separate prepayment form: hidden by default inside an accordion -->
+      <details class="accordion" [open]="prepaymentFormOpen()"
+        (toggle)="prepaymentFormOpen.set($any($event.target).open)">
+        <summary class="section-title">
+          Multiple Prepayments
+          <span class="small muted">
+            ({{ prepayments().length }} added)
+          </span>
+        </summary>
+
+        <form class="inputs-section prepayment-form" (ngSubmit)="addPrepayment()">
+          <div class="input-row">
+            <label>Amount</label>
+            <input type="number" [value]="newPrepaymentAmount()"
+              (input)="onNewPrepaymentAmount($any($event.target).value)" class="money" />
+          </div>
+          <div class="input-row">
+            <label>Fee %</label>
+            <input type="number" [value]="newPrepaymentFeePercent()"
+              (input)="onNewPrepaymentFeePercent($any($event.target).value)" />
+          </div>
+          <div class="input-row">
+            <label>Month</label>
+            <input type="number" min="1" [value]="newPrepaymentMonth()"
+              (input)="onNewPrepaymentMonth($any($event.target).value)" />
+          </div>
+          <div class="input-row">
+            <label>Effect</label>
+            <div class="radio-row">
+              <label><input type="radio" name="newPrepayEffect" [checked]="newPrepaymentEffect() === 'reducePayment'"
+                  (change)="newPrepaymentEffect.set('reducePayment')" />
+                Reduce monthly</label>
+              <label><input type="radio" name="newPrepayEffect" [checked]="newPrepaymentEffect() === 'reduceTerm'"
+                  (change)="newPrepaymentEffect.set('reduceTerm')" />
+                Reduce term</label>
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button type="submit" class="btn">
+              Add prepayment
+            </button>
+          </div>
+        </form>
+
+        <div class="prepayment-list inputs-section">
+          <div *ngFor="let p of prepayments(); let i = index" class="prepayment-row">
             <div class="result-card card-pink">
-              <div class="result-label">
-                Prepayment {{ i + 1 }} (month {{ p.month }})
-              </div>
+              <div class="result-label">Prepayment {{ i + 1 }} (month {{ p.month }})</div>
               <div class="result-value">{{ formatCurrency(p.amount) }}</div>
-              <div class="card-badge">
-                {{ p.effect === 'reducePayment' ? '↓pay' : '↓term' }}
-              </div>
+              <div class="card-badge">{{ p.effect === 'reducePayment' ? '↓pay' : '↓term' }}</div>
               <div class="card-actions">
-                <button
-                  type="button"
-                  class="btn btn-link"
-                  (click)="removePrepayment(i)"
-                >
-                  Remove
-                </button>
+                <button type="button" class="btn btn-link" (click)="removePrepayment(i)">Remove</button>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="button-group">
-        <button type="button" class="btn btn-secondary" (click)="resetForm()">
-          Reset
-        </button>
-      </div>
-
-      <p class="input-note">
-        Calculates with {{ downpaymentPercent() }}% down payment. Includes
-        capital gains tax (4%) and attorney's fee ({{ attorneyFeePercent() }}%).
-        Results update automatically.
-      </p>
-    </form>
+      </details>
+    </div>
 
     <section class="results-section" aria-live="polite">
       <div class="results-header">
@@ -295,10 +241,8 @@
       </div>
 
       <div class="disclaimer">
-        <small
-          >All results are estimates. Verify with your lender and tax advisor
-          before making decisions.</small
-        >
+        <small>All results are estimates. Verify with your lender and tax advisor
+          before making decisions.</small>
       </div>
 
       <div class="results-cards">
