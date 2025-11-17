@@ -37,16 +37,16 @@ export class App {
   // New Apartment signals
   protected readonly apartmentPrice = signal(159400000);
   protected readonly parkingPrice = signal(8000000);
-  protected readonly storagePrice = signal(2500000);
-  protected readonly movingCosts = signal(3000000);
+  protected readonly storagePrice = signal(1911000);
+  protected readonly movingCosts = signal(5000000);
 
   // Current Apartment signals
   protected readonly currentPrice = signal(105000000);
   protected readonly currentMortgage = signal(8300000);
 
   // Financing signals
-  protected readonly interestRate = signal(6.5);
-  protected readonly interestOptions = [5.5, 6, 6.5, 7, 8, 9];
+  protected readonly interestRate = signal(6.09);
+  protected readonly interestOptions = [5.5, 6.09, 6.5, 7, 8, 9];
   protected readonly expectedChangeOptions = [-5, -2, 0, 3, 5, 7, 10];
   protected readonly expectedPriceChange = signal(0);
   protected readonly yearsToSale = signal(0);
@@ -55,7 +55,7 @@ export class App {
   protected readonly termYears = signal(30);
   // Attorney's fee options (percent of total apartment price)
   protected readonly attorneyFeeOptions = [0, 0.5, 0.7, 1];
-  protected readonly attorneyFeePercent = signal(0.5);
+  protected readonly attorneyFeePercent = signal(0.0);
 
   // Reactive form backing the UI (keeps inputs in a single form object)
   protected readonly form: FormGroup = new FormGroup({
@@ -380,19 +380,19 @@ export class App {
     const defaults = {
       apartmentPrice: 159400000,
       parkingPrice: 8000000,
-      storagePrice: 2500000,
-      movingCosts: 3000000,
+      storagePrice: 1911000,
+      movingCosts: 5000000,
 
       currentPrice: 98000000,
       currentMortgage: 8300000,
 
-      interestRate: 6.5,
+      interestRate: 6.09,
       downpaymentPercent: 0,
       expectedPriceChange: 0,
       yearsToSale: 0,
       currentSavings: 15000000,
       termYears: 30,
-      attorneyFeePercent: 0.5,
+      attorneyFeePercent: 0.0,
     };
 
     this.apartmentPrice.set(defaults.apartmentPrice);
